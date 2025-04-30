@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CHULETA DE PHP - DESARROLLO RPG</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f9;
+      color: #333;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+    h3 {
+      margin-top: 1.5rem;
+    }
+    code {
+    
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    ul {
+      margin-left: 1.5rem;
+    }
+    li {
+      margin: 0.3rem 0;
+    }
+    hr {
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+    <h1>📘 CHULETA DE PHP - DESARROLLO RPG</h1>
+
+<h2>👋 INTRODUCCIÓN</h2>
+<p>Esta chuleta contiene los conceptos principales que necesitarás para entender y modificar el proyecto RPG. Incluye tanto los conceptos que iremos cubriendo en las próximas clases como otros conceptos que pueden resultaros útiles.</p>
+
+<div class="arrays-section">
+  <h2>🔄 ARRAYS EN PHP</h2>
+  
+  <h3>Arrays indexados (numéricos)</h3>
+  <pre><code class="language-php">// Definición
+$enemigos = ['Goblin', 'Kobold', 'Rata gigante'];
+
+// Acceso por índice
+$primerEnemigo = $enemigos[0];  // Goblin
+
+// Añadir elemento
+$enemigos[] = 'Orco';  // Añade al final</code></pre>
+  
+  <h3>Arrays asociativos (clave-valor)</h3>
+  <pre><code class="language-php">// Definición 
+$player = [
+    'name' => 'Aventurero', 
+    'level' => 1,
+    'health' => 100
+];
+
+// Acceso por clave
+$playerName = $player['name'];  // Aventurero</code></pre>
+  
+  <h3>Arrays multidimensionales</h3>
+  <pre><code class="language-php">// Array de arrays
+$enemies = [
+    ['Goblin', 1, 15, 8, 20],
+    ['Kobold', 1, 12, 7, 15]
+];
+
+// Array asociativo anidado
+$response = [
+    'player' => $player,
+    'enemy' => $enemy,
+    'rolls' => [
+        'player' => $player_roll,
+        'enemy' => $enemy_roll
+    ]
+];</code></pre>
+  
+  <h3>Funciones comunes para arrays</h3>
+  <pre><code class="language-php">// Recorrer array
+foreach ($enemies as $enemy) {
+    echo $enemy[0];  // Nombre del enemigo
+}
+
+// Recorrer array asociativo
+foreach ($player as $key => $value) {
+    echo "$key: $value";
+}
+
+// Verificar si existe una clave
+if (isset($player['health'])) { ... }
+
+// Añadir/eliminar elementos
+$array[] = 'nuevo';      // Añadir al final
+array_push($array, 'a');  // Añadir al final
+array_pop($array);        // Eliminar último
+array_shift($array);      // Eliminar primero
+
+// Otras funciones útiles
+count($array);            // Número de elementos
+array_merge($arr1, $arr2); // Combinar arrays
+implode(', ', $array);    // Array a string
+explode('/', $string);    // String a array</code></pre>
+</div>
+
+<div class="array-functions">
+  <h3>Funciones de manipulación funcional de arrays</h3>
+  <pre><code class="language-php">// array_map() - Aplicar una función a cada elemento
+$niveles = [1, 2, 3, 4];
+$nivelesDobles = array_map(function($nivel) {
+    return $nivel * 2;
+}, $niveles);
+// $nivelesDobles = [2, 4, 6, 8]
+
+// Con función flecha (PHP 7.4+)
+$nivelesDobles = array_map(fn($nivel) => $nivel * 2, $niveles);
+
+// array_filter() - Filtrar elementos según una condición
+$enemigos = ['Goblin', 'Dragón', 'Orco', 'Dragón Joven'];
+$dragones = array_filter($enemigos, function($enemigo) {
+    return strpos($enemigo, 'Dragón') !== false;
+});
+// $dragones = ['Dragón', 'Dragón Joven']
+
+// array_reduce() - Reducir array a un solo valor
+$daños = [5, 8, 12, 4];
+$dañoTotal = array_reduce($daños, function($acumulado, $daño) {
+    return $acumulado + $daño;
+}, 0);
+// $dañoTotal = 29
+
+// array_key_exists() - Verificar si existe una clave (mejor que isset para valores null)
+if (array_key_exists('health', $player)) { /* ... */ }
+
+// in_array() - Verificar si un valor existe en el array
+if (in_array('Dragón', $enemigos)) { /* ... */ }
+
+// array_search() - Buscar valor y devolver su clave
+$posicion = array_search('Orco', $enemigos);  // 2</code></pre>
+</div>
+
+<h2>🔰 PARADIGMA POO (PROGRAMACIÓN ORIENTADA A OBJETOS)</h2>
+
+<h3>Clases y objetos</h3>
+<pre><code class="language-php">
+// Definición de una clase
+class PlayerController {
+    private $conn;
+    private $player_id = 1;
+
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
+
+    public function getPlayer() {
+        // Código...
+    }
+}
+// Crear una instancia (objeto)
+$controller = new PlayerController($conn);
+$controller->getPlayer();
+</code></pre>
+
+<h3>Modificadores de acceso</h3>
+<ul>
+  <li><strong>public</strong>: Accesible desde cualquier parte</li>
+  <li><strong>private</strong>: Solo accesible dentro de la clase</li>
+  <li><strong>protected</strong>: Accesible desde la clase y subclases</li>
+</ul>
+
+<h3>Diferencias con Java</h3>
+<ul>
+  <li>PHP usa <code>$this-&gt;</code> en lugar de <code>this.</code></li>
+  <li>PHP usa <code>-&gt;</code> en lugar de <code>.</code> para acceder a métodos</li>
+  <li>No necesita definición de tipos (aunque se puede usar tipado estricto)</li>
+</ul>
+
+<div class="poo-avanzado">
+  <h2>🧩 PROGRAMACIÓN ORIENTADA A OBJETOS AVANZADA</h2>
+  
+  <h3>Herencia</h3>
+  <pre><code class="language-php">// Clase padre
+class Controller {
+    protected $conn;
+    
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
+    
+    protected function sendResponse($data) {
+        // Método común
+    }
+}
+
+// Clase hija
+class PlayerController extends Controller {
+    public function getPlayer() {
+        // Implementación específica
+        $this->sendResponse($player); // Usa método del padre
+    }
+}</code></pre>
+
+  <h3>Interfaces</h3>
+  <pre><code class="language-php">// Definición de interfaz
+interface CombatInterface {
+    public function attack();
+    public function defend($damage);
+}
+
+// Implementación
+class Player implements CombatInterface {
+    public function attack() {
+        // Implementación obligatoria
+    }
+    
+    public function defend($damage) {
+        // Implementación obligatoria
+    }
+}</code></pre>
+
+  <h3>Clases abstractas</h3>
+  <pre><code class="language-php">// Clase abstracta
+abstract class Entity {
+    protected $health;
+    
+    // Método abstracto (debe implementarse)
+    abstract public function takeDamage($amount);
+    
+    // Método concreto (ya implementado)
+    public function isAlive() {
+        return $this->health > 0;
+    }
+}
+
+class Player extends Entity {
+    // Debemos implementar el método abstracto
+    public function takeDamage($amount) {
+        $this->health -= $amount;
+    }
+}</code></pre>
+
+  <h3>Métodos y propiedades estáticas</h3>
+  <pre><code class="language-php">class Game {
+    // Propiedad estática (compartida por todas las instancias)
+    public static $version = "1.0";
+    
+    // Método estático (se puede llamar sin instanciar)
+    public static function getInstance() {
+        // Implementación...
+    }
+}
+
+// Uso
+echo Game::$version;        // 1.0
+$game = Game::getInstance(); // Obtiene instancia</code></pre>
+
+  <h3>Métodos mágicos</h3>
+  <pre><code class="language-php">class Player {
+    private $data = [];
+    
+    // Constructor (ya lo hemos visto)
+    public function __construct($name) {
+        $this->data['name'] = $name;
+    }
+    
+    // Getter mágico
+    public function __get($key) {
+        return $this->data[$key] ?? null;
+    }
+    
+    // Setter mágico
+    public function __set($key, $value) {
+        $this->data[$key] = $value;
+    }
+    
+    // Convierte objeto a string
+    public function __toString() {
+        return "Jugador: {$this->data['name']}";
+    }
+}</code></pre>
+
+  <h3>Namespaces (espacios de nombres)</h3>
+  <pre><code class="language-php">// Archivo: controllers/PlayerController.php
+namespace App\Controllers;
+
+class PlayerController {
+    // ...
+}
+
+// Archivo: main.php
+use App\Controllers\PlayerController;
+
+$controller = new PlayerController();</code></pre>
+
+  <h3>Traits (reutilización de código)</h3>
+  <pre><code class="language-php">// Definir un trait
+trait Logger {
+    protected function log($message) {
+        error_log("[" . date('Y-m-d H:i:s') . "] $message");
+    }
+}
+
+// Usar trait en una clase
+class PlayerController {
+    use Logger;
+    
+    public function updatePlayer() {
+        $this->log("Actualizando jugador"); // Método del trait
+        // resto del código...
+    }
+}</code></pre>
+
+  <h3>Type Hinting (Declaración de tipos)</h3>
+  <pre><code class="language-php">// PHP 7+ permite declaración de tipos
+class PlayerController {
+    // Parámetros tipados
+    public function getPlayerById(int $id): array {
+        // Debe retornar un array
+        return $player;
+    }
+    
+    // PHP 7.1+ permite tipos anulables
+    public function findPlayer(string $name): ?Player {
+        // Retorna Player o null
+    }
+}</code></pre>
+</div>
+
+<h2>🔄 SESIONES Y MANEJO DE ESTADO</h2>
+
+<h3>Iniciar/configurar sesiones</h3>
+<pre><code class="language-php">
+// Establecer opciones de cookies de sesión
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => '',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+// Iniciar sesión
+session_start();
+</code></pre>
+
+<h3>Uso de variables de sesión</h3>
+<pre><code class="language-php">
+// Guardar datos
+$_SESSION['combat_active'] = true;
+$_SESSION['enemy'] = $enemy;
+
+// Verificar datos
+if (!isset($_SESSION['combat_active']) || !$_SESSION['combat_active']) {
+    // Error: no hay combate activo
+}
+
+// Eliminar datos
+unset($_SESSION['enemy']);
+</code></pre>
+
+<h2>🔒 MANEJO SEGURO DE BASES DE DATOS</h2>
+
+<h3>Conexión a MySQL</h3>
+<pre><code class="language-php">
+$conn = new mysqli($host, $username, $password, $dbname, $port);
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+</code></pre>
+
+<h3>Consultas preparadas (previenen SQL Injection)</h3>
+<pre><code class="language-php">
+    // Preparar la consulta
+    $sql = "SELECT * FROM players WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    
+    // Vincular parámetros
+    $stmt->bind_param("i", $player_id); // i = integer, s = string
+    
+    // Ejecutar
+    $stmt->execute();
+    
+    // Obtener resultados
+    $result = $stmt->get_result();
+    $player = $result->fetch_assoc();
+</code></pre>
+
+<h3>Ejecutar consultas múltiples</h3>
+<pre><code class="language-php">
+// Con bucle
+$stmt = $conn->prepare("INSERT INTO enemies VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("siiii", $name, $level, $health, $strength, $exp_reward);
+
+foreach ($enemies as $enemy) {
+    $name = $enemy[0];
+    $level = $enemy[1];
+    // ... más asignaciones
+    $stmt->execute();
+}
+</code></pre>
+
+<p>¿Por qué hay un siiii antes de las variables?</p>
+<div class="bind-param-info">
+  <p>Cada carácter en "siiii" corresponde al tipo de un parámetro:</p>
+  <ul>
+    <li>"s" = string (cadena de texto) - para <code>$name</code></li>
+    <li>"i" = integer (número entero) - para <code>$level</code></li>
+    <li>"i" = integer - para <code>$health</code></li>
+    <li>"i" = integer - para <code>$strength</code></li>
+    <li>"i" = integer - para <code>$exp_reward</code></li>
+  </ul>
+  <p>En MySQLi, estos son los tipos que puedes usar:</p>
+  <ul>
+    <li>"i" - entero</li>
+    <li>"d" - double (número decimal)</li>
+    <li>"s" - string (texto)</li>
+    <li>"b" - blob (datos binarios)</li>
+  </ul>
+</div>
+
+<h2>🏗️ ARQUITECTURA DE APLICACIÓN</h2>
+
+<h3>Patrón MVC</h3>
+<ul>
+  <li><strong>Modelo</strong>: Gestiona datos y lógica de negocio (ej. getRandomEnemy())</li>
+  <li><strong>Vista</strong>: Maneja la presentación (frontend/HTML - en nuestro caso lo tenemos separado)</li>
+  <li><strong>Controlador</strong>: Coordina el modelo y la vista (ej. PlayerController)</li>
+</ul>
+
+<pre><code class="language-php">
+    // Ejemplo de separación en controladores
+    class PlayerController {}    // Gestiona jugadores
+    class MapController {}       // Gestiona el mapa
+    class CombatController {}    // Gestiona combates
+</code></pre>
+
+<h3>Arquitecturas modernas</h3>
+<ul>
+  <li><strong>Hexagonal</strong></li>
+  <li><strong>Puertos y Adaptadores</strong></li>
+  <li><strong>DDD</strong></li>
+</ul>
+
+<h2>📡 API Y JSON</h2>
+
+<h3>Respuestas JSON</h3>
+<pre><code class="language-php">
+// Enviar respuesta JSON
+function send_response($status_code, $data) {
+    http_response_code($status_code);
+    echo json_encode($data);
+    exit;
+}
+
+// Uso
+send_response(200, ['player' => $player]);
+</code></pre>
+
+<h3>Recibir datos JSON</h3>
+<pre><code class="language-php">
+// Obtener datos enviados en el cuerpo
+$input = file_get_contents('php://input');
+$request_data = json_decode($input, true) ?? [];
+</code></pre>
+
+<h3>Estructura API REST</h3>
+<ul>
+  <li><strong>GET</strong>: Obtener recursos (getPlayer())</li>
+  <li><strong>POST</strong>: Crear recursos (startCombat())</li>
+  <li><strong>PUT</strong>: Actualizar recursos (updatePlayer())</li>
+  <li><strong>DELETE</strong>: Eliminar recursos (no usado en este proyecto)</li>
+</ul>
+
+<h2>📋 CABECERAS HTTP (HEADERS)</h2>
+
+<h3>Configuración CORS</h3>
+<pre><code class="language-php">
+    // Permitir orígenes específicos
+    header('Access-Control-Allow-Origin: http://127.0.0.1:5500'); // Cambia esto por el origen de tu frontend o * para permitir todos (no recomendado)
+    // Permitir métodos
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    // Permitir cabeceras
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    // Permitir cookies
+    header('Access-Control-Allow-Credentials: true');
+</code></pre>
+
+<h3>Códigos de estado HTTP</h3>
+<ul>
+  <li>200: OK</li>
+  <li>400: Error de cliente</li>
+  <li>404: No encontrado</li>
+  <li>405: Método no permitido</li>
+  <li>500: Error de servidor</li>
+</ul>
+
+<h2>🛣️ ROUTING EN PHP</h2>
+<pre><code class="language-php">
+// Obtener la ruta solicitada
+$request_uri = $_SERVER['REQUEST_URI'];
+$uri_parts = explode('/', trim(parse_url($request_uri, PHP_URL_PATH), '/'));
+
+// Obtener endpoint y recursos
+$endpoint = $uri_parts[0] ?? '';
+$resource_id = $uri_parts[1] ?? null;
+
+// Routing con switch
+switch ($endpoint) {
+    case 'player':
+        // Crear controlador
+        $controller = new PlayerController($conn);
+        if ($resource_id === 'stats') {
+            // GET /player/stats
+            $controller->getPlayerStats();
+        }
+        break;
+    case 'map':
+        // Otro controlador
+        break;
+
+    default:
+        // Ruta no encontrada
+        send_response(404, ['error' => 'Endpoint no encontrado']);
+        break;
+}
+</code></pre>
+
+<h2>🎮 MECÁNICAS DE JUEGO Y ALEATORIEDAD</h2>
+<pre><code class="language-php">
+// Número entero entre 1 y 20
+$player_roll = mt_rand(1, 20); // a partir de PHP 7.1 se rand() es un alias de mt_rand()
+
+// Número decimal entre 0 y 1
+$random = mt_rand() / mt_getrandmax();
+</code></pre>
+
+<pre><code class="language-php">
+// Si el número aleatorio es menor que la probabilidad, hay encuentro
+if ($random &lt; $tile['enemy_chance']) {
+    // Hay encuentro
+}
+</code></pre>
+
+<h2>🧩 CONCEPTOS ADICIONALES</h2>
+
+<h3>Superglobales</h3>
+<ul>
+  <li><code>$_GET: Datos de la URL (?param=valor)</code></li>
+  <li><code>$_POST: Datos enviados por formulario</code></li>
+  <li><code>$_SERVER: Información del servidor</code></li>
+  <li><code>$_SESSION: Datos de sesión</code></li>
+  <li><code>$_FILES: Archivos subidos</code></li>
+</ul>
+
+<h3>Inclusión de archivos</h3>
+<pre><code class="language-php">
+include_once 'controllers/player_controller.php';
+include 'header.php';
+require_once 'config.php';
+require 'functions.php';
+</code></pre>
+
+<h3>Constantes mágicas</h3>
+<ul>
+  <li><code>__DIR__: Directorio del archivo actual</code></li>
+  <li><code>__FILE__: Ruta completa del archivo</code></li>
+  <li><code>__CLASS__: Nombre de la clase actual</code></li>
+  <li><code>__METHOD__: Nombre del método actual</code></li>
+  <li><code>__FUNCTION__</code></li>
+  <li><code>__LINE__</code></li>
+</ul>
+
+<h3>Configuración de PHP</h3>
+<pre><code class="language-php">
+error_reporting(E_ALL); // Reportar todos los errores
+ini_set('display_errors', 0); // No mostrar errores en producción
+ini_set('log_errors', 1); // Registrar errores
+ini_set('error_log', 'php_error.log');
+</code></pre>
+
+<h3>Operadores útiles</h3>
+<pre><code class="language-php">
+$result = $condition ? 'valor si true' : 'valor si false';
+$username = $_POST['username'] ?? 'Invitado';
+$a ??= $b;
+$comparison = $a <=> $b;
+</code></pre>
+
+<h2>📌 IDEAS PARA EXTENSIÓN DEL JUEGO</h2>
+<ol>
+  <li>...</li>
+</ol>
+<p>¿Qué se os ocurre?</p>
+
+<h2>🔍 DEPURACIÓN Y BUENAS PRÁCTICAS</h2>
+
+<h3>Depuración</h3>
+<pre><code class="language-php">
+var_dump($variable);
+print_r($array);
+error_log("Valor de variable: " . json_encode($variable));
+die("Mensaje de error");
+exit;
+</code></pre>
+
+<h3>Manejo de errores</h3>
+<pre><code class="language-php">
+try {
+    $result = operacionRiesgosa();
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+    error_log("Error en operación: " . $e->getMessage());
+}
+</code></pre>
+
+<h3>Buenas prácticas</h3>
+<ol>
+  <li>Validar siempre entradas de usuario</li>
+  <li>Usar sentencias preparadas para SQL</li>
+  <li>Manejar y registrar errores adecuadamente</li>
+  <li>Seguir convenciones de nombrado y estructura</li>
+  <li>Mantener lógica de presentación separada de la lógica de negocio</li>
+  <li>Optimizar consultas a la base de datos</li>
+  <li>Documentar el código con comentarios claros</li>
+  <li>Usar constantes para valores fijos o configuraciones</li>
+</ol>
+</body>
+</html>

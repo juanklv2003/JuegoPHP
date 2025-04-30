@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG D&D - Aventura</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Panel de información del jugador -->
+        <div class="player-panel">
+            <div class="player-info">
+                <h2 id="player-name">Aventurero</h2>
+                <div class="player-level">Nivel <span id="player-level">1</span></div>
+                <div class="stat-bar health-bar">
+                    <div class="stat-label">Salud</div>
+                    <div class="bar-container">
+                        <div id="health-bar-fill" class="bar-fill"></div>
+                    </div>
+                    <div class="stat-value"><span id="player-health">100</span>/<span id="player-max-health">100</span></div>
+                </div>
+                <div class="stat-bar exp-bar">
+                    <div class="stat-label">Experiencia</div>
+                    <div class="bar-container">
+                        <div id="exp-bar-fill" class="bar-fill"></div>
+                    </div>
+                    <div class="stat-value"><span id="player-exp">0</span>/<span id="player-next-level">100</span></div>
+                </div>
+                <div class="player-stats">
+                    <div class="stat">
+                        <i class="fas fa-fist-raised"></i> Fuerza: <span id="player-strength">10</span>
+                    </div>
+                </div>
+            </div>
+            <div class="player-stats-summary">
+                <div>Combates ganados: <span id="battles-won">0</span></div>
+                <div>Combates perdidos: <span id="battles-lost">0</span></div>
+                <div>Pasos dados: <span id="steps-taken">0</span></div>
+            </div>
+        </div>
+
+        <!-- Mapa del juego -->
+        <div class="map-container">
+            <div id="game-map" class="game-map"></div>
+            <div class="controls">
+                <div class="control-row">
+                    <button id="btn-up" class="control-btn"><i class="fas fa-arrow-up"></i></button>
+                </div>
+                <div class="control-row">
+                    <button id="btn-left" class="control-btn"><i class="fas fa-arrow-left"></i></button>
+                    <button id="btn-down" class="control-btn"><i class="fas fa-arrow-down"></i></button>
+                    <button id="btn-right" class="control-btn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de combate (oculto inicialmente) -->
+        <div id="combat-panel" class="combat-panel hidden">
+            <h2>¡Combate!</h2>
+            <div class="enemy-info">
+                <h3 id="enemy-name">Enemigo</h3>
+                <div class="stat-bar enemy-health-bar">
+                    <div class="stat-label">Salud enemigo</div>
+                    <div class="bar-container">
+                        <div id="enemy-health-bar-fill" class="bar-fill"></div>
+                    </div>
+                    <div class="stat-value"><span id="enemy-health">50</span>/<span id="enemy-max-health">50</span></div>
+                </div>
+                <div class="enemy-stats">
+                    <div>Nivel: <span id="enemy-level">1</span></div>
+                    <div>Fuerza: <span id="enemy-strength">8</span></div>
+                    <div>Recompensa XP: <span id="enemy-xp-reward">20</span></div>
+                </div>
+            </div>
+            
+            <div class="dice-container">
+                <div id="player-dice" class="dice">?</div>
+                <div class="vs">VS</div>
+                <div id="enemy-dice" class="dice">?</div>
+            </div>
+            
+            <div class="combat-log" id="combat-log">
+                <p>¡Has encontrado un enemigo!</p>
+            </div>
+            
+            <div class="combat-actions">
+                <button id="btn-attack" class="action-btn attack-btn">Atacar</button>
+                <button id="btn-flee" class="action-btn flee-btn">Huir</button>
+            </div>
+        </div>
+
+        <!-- Log del juego -->
+        <div class="game-log">
+            <h3>Log de aventura</h3>
+            <div id="adventure-log" class="log-content">
+                <p>Bienvenido a tu aventura. Usa los controles para moverte.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de fin de juego (oculto inicialmente) -->
+    <div id="game-over-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="game-over-title">¡Has sido derrotado!</h2>
+            <p id="game-over-message">Tu aventura ha terminado...</p>
+            <button id="btn-restart" class="action-btn">Reiniciar juego</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="api.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

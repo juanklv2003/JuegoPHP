@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Introducción a PHP - Clase 1</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .slide { padding: 60px 80px; background: white; margin: 20px auto; width: 80%; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+    h1, h2 { color: #2c3e50; }
+    code { background: #eee; padding: 2px 6px; border-radius: 4px; }
+    ul { margin-left: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <h1>Clase 1: Introducción a PHP</h1>
+    <p>Objetivos: comprender qué es PHP, diferencias con Java, conexión a bases de datos.</p>
+
+  </div>
+
+  <div class="slide">
+    <h2>Empezamos</h2>
+    <ul>
+      <li>Preparar XAMPP con puerto 3307</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>¿Qué es PHP?</h2>
+    <ul>
+      <li>Lenguaje del lado del servidor</li>
+      <li>Amplio uso en desarrollo web (WordPress, Laravel)</li>
+      <li>Sintaxis similar a C / Java</li>
+      <li>Archivos terminan en <code>.php</code></li>
+      <li>El código PHP se encierra entre <code>&lt;?php ?&gt;</code></li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>Primer script</h2>
+    <pre><code>&lt;?php
+echo "Hola mundo";
+?&gt;</code></pre>
+    <p>Se ejecuta en el servidor y devuelve HTML.</p>
+  </div>
+
+  <div class="slide">
+    <h2>Variables y tipos</h2>
+    <pre><code>$nombre = "Ana";
+$edad = 20;
+$activo = true;</code></pre>
+  </div>
+
+  <div class="slide">
+    <h2>Estructuras básicas</h2>
+    <pre><code>if ($edad &gt;= 18) {
+    echo "Mayor de edad";
+} else {
+    echo "Menor de edad";
+}</code></pre>
+    <pre><code>for ($i = 0; $i &lt; 5; $i++) {
+    echo $i;
+}</code></pre>
+  </div>
+
+  <div class="slide">
+    <h2>Funciones</h2>
+    <pre><code>function saludar($nombre) {
+    return "Hola, $nombre";
+}
+echo saludar("Luis");</code></pre>
+  </div>
+
+  <div class="slide">
+    <h2>Superglobales</h2>
+    <ul>
+      <li><code>$_GET</code>: datos de la URL</li>
+      <li><code>$_POST</code>: datos enviados por formulario</li>
+      <li><code>$_SERVER</code>: info del servidor</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>Conexión con MySQL (MySQLi)</h2>
+    <pre><code>$conn = new mysqli("localhost", "root", "", "basedatos", 3307);
+if ($conn-&gt;connect_error) {
+    die("Error: " . $conn-&gt;connect_error);
+}</code></pre>
+  </div>
+
+  <div class="slide">
+    <h2>Conexión con MySQL (PDO)</h2>
+    <pre><code>try {
+    $pdo = new PDO("mysql:host=localhost;port=3307;dbname=basedatos", "root", "");
+} catch (PDOException $e) {
+    echo "Error: " . $e-&gt;getMessage();
+}</code></pre>
+  </div>
+
+  <div class="slide">
+    <h2>Próximos pasos</h2>
+    <ul>
+      <li>Iniciar base de datos con script db_init</li>
+    </ul>
+  </div>
+
+</body>
+</html>

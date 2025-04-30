@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>No dejes que la verdad te arruine una buena historia</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f0f0; margin: 0; padding: 0; }
+    .slide {
+      width: 80%;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      display: none;
+    }
+    .slide.active {
+      display: block;
+    }
+    .disclaimer {
+      text-align: center;
+      font-style: italic;
+      color: #555;
+    }
+    .dialogue {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .dialogue img {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+    }
+    .bubble {
+      background: #e0e0e0;
+      padding: 15px 20px;
+      border-radius: 15px;
+      position: relative;
+      max-width: 70%;
+    }
+    .bubble::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      width: 0;
+      height: 0;
+    }
+    .ceo .bubble {
+      background: #d1e7ff;
+    }
+    .ceo .bubble::before {
+      left: -15px;
+      border: 10px solid transparent;
+      border-right-color: #d1e7ff;
+    }
+    .dev .bubble {
+      background: #ffd1dc;
+    }
+    .dev .bubble::before {
+      right: -15px;
+      border: 10px solid transparent;
+      border-left-color: #ffd1dc;
+    }
+    .ceo { flex-direction: row; }
+    .dev { flex-direction: row-reverse; }
+    .nav-btns {
+      text-align: center;
+      margin: 20px;
+    }
+    .nav-btns button {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide active">
+    <h1>No dejes que la verdad te arruine una buena historia</h1>
+    <p class="disclaimer">Puede que lo que se indique a continuación se haya basado en hechos reales... o que la realidad supere a la ficción.</p>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue ceo">
+      <img src="ceo.png" alt="CEO">
+      <div class="bubble">
+        ¡Lo tengo! ¡Vamos a hacer un videojuego RPG por turnos en la web y nos vamos a hacer de oro! Le pedí a ChatGPT que hiciera una primera versión en PHP.
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue dev">
+      <img src="programadora.png" alt="Programadora">
+      <div class="bubble">
+        ¿PHP? ¿Pero eso no es lo que se usaba en las webs de los 2000? Pero si eso no lo toco desde la uni… Y creo que ni aprobé esa parte.
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue ceo">
+      <img src="ceo.png" alt="CEO">
+      <div class="bubble">
+        ¡Nada que no puedas hacer! Además, PHP sigue vivo. Si algo funciona, no se toca, ¿no?
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue dev">
+      <img src="programadora.png" alt="Programadora">
+      <div class="bubble">
+        ¿También te funcionó ese argumento cuando me pediste que arreglara el ascensor?
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue ceo">
+      <img src="ceo.png" alt="CEO">
+      <div class="bubble">
+        Y te negaste, igual que cuando te pedí que arreglases la máquina expendedora. Eres informática, entiendes de esas cosas, de cables, botones... Y arreglaste mi ordenador...
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue dev">
+      <img src="programadora.png" alt="Programadora">
+      <div class="bubble">
+        ...porque estaba desenchufado. Pero bueno, habrá ver qué ha hecho ChatGPT con ese PHP.
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue ceo">
+      <img src="ceo.png" alt="CEO">
+      <div class="bubble">
+        ¡Ese es el espíritu! Te quejas y eso que tienes a un equipo de jovenes promesas para ayudarte, aprenderéis PHP, mejorarás el código y haremos historia. ¡Tenemos una semana!
+      </div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="dialogue dev">
+      <img src="programadora.png" alt="Programadora">
+      <div class="bubble">
+        Historia vamos a hacer, sí. Y espero que sea con finales alternativos.
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-btns">
+    <button onclick="prevSlide()">Anterior</button>
+    <button onclick="nextSlide()">Siguiente</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+  </script>
+
+</body>
+</html>
