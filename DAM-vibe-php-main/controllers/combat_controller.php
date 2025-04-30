@@ -113,6 +113,7 @@ class CombatController {
             $enemy_damage = 1000 + floor($enemy['strength'] / 10);
             $player['health'] -= $enemy_damage;
         }
+        // tu prima
         
         // Actualizar salud del jugador en la base de datos
         $sql = "UPDATE players SET health = ? WHERE id = ?";
